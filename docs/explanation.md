@@ -47,7 +47,7 @@ Someone can ask: what if we have classes with more than one property? Yes, in re
   padding: 5px;
 }
 ```
-Underscore is used to visually separate classes with one property and the mix of several ones. The decision was made because `._abstract-name` isn't really self-descriptive and can imply anything like a "black-box" when reading other people's code or even your own after quite more time. Other important details around mix we discuss later. Move on.
+Underscore is used to visually separate classes with one property and the mix of several ones. The decision was made because `._abstract-name` isn't really self-descriptive and can imply anything like a "black-box" when reading other people's HTML code or even your own after quite more time. Other important details around mix we discuss later. Move on.
 
 ###Set
 Here is the last main concept - **set**. Set is a **group of elements or mixes**. Add the previous mixes, some more elements and see the result:
@@ -116,11 +116,11 @@ Let's take a look at more "real-life" (but still very minimalistic) example:
 .pdd-r-sm     {padding-right: 5px;}
 .pdd-b-sm     {padding-bottom: 5px;}
 .pdd-l-sm     {padding-left: 5px;}
-.pdd-sm       {padding: 5px;}
-.pdd-t-sm     {padding-top: 5px;}
-.pdd-r-sm     {padding-right: 5px;}
-.pdd-b-sm     {padding-bottom: 5px;}
-.pdd-l-sm     {padding-left: 5px;}
+.pdd-md       {padding: 10px;}
+.pdd-t-md     {padding-top: 10px;}
+.pdd-r-md     {padding-right: 10px;}
+.pdd-b-md     {padding-bottom: 10px;}
+.pdd-l-md     {padding-left: 10px;}
 
 /*
  * Margin set
@@ -170,26 +170,24 @@ It may looks scary, but don't hurry with the conclusions. You may notice element
 
 >
 - at the beginning sets with box-model properties, then visual related ones;
-- margin & padding sets are strict collections of graduated values (small, medium etc);
+- margin & padding sets are strict _*collections*_ of graduated values (small, medium etc);
 - background set has pseudo-class elements with an appropriate names goes after double dash `*--hover`;
 
-In this way, I want to emphasize that creating elements isn't *chaotic and messy* process. In contrast, creating elements takes some patience, premeditate and conventions. But I can state if you master this technique you will literally draw your GUI like in WYSIWYG editors. Let's take a look at subsequent concept of set - **collection**. Collection is a **collection of elements united by related values under one set**:
+Let's take a look at one more point about elements. It is subsequent concept of set - **collection**. Collection is a **group of elements united by related values under one set**. For example:
 ```CSS
 /*
  * Padding set
  */
 /* sm */
 .pdd-sm       {padding: 5px;}             ^
-.pdd-t-sm     {padding-top: 5px;}         |
-.pdd-r-sm     {padding-right: 5px;}       | "sm" collection
-.pdd-b-sm     {padding-bottom: 5px;}      |
-.pdd-l-sm     {padding-left: 5px;}        v
+.pdd-t-sm     {padding-top: 5px;}         | "sm" collection
+.pdd-r-sm     {padding-right: 5px;}       |
+...                                       v
 /* md */
-.pdd-md       {padding: 5px;}             ^
-.pdd-t-md     {padding-top: 5px;}         |
-.pdd-r-md     {padding-right: 5px;}       | "md" collection
-.pdd-b-md     {padding-bottom: 5px;}      |
-.pdd-l-md     {padding-left: 5px;}        V
+.pdd-md       {padding: 10px;}            ^
+.pdd-t-md     {padding-top: 10px;}        | "md" collection
+.pdd-r-md     {padding-right: 10px;}      |
+...                                       v
 
 /*
  * Border set
@@ -197,11 +195,13 @@ In this way, I want to emphasize that creating elements isn't *chaotic and messy
 /* thin */
 .brd-thin     {border: 1px solid;}        ^
 .brd-t-thin   {border-top: 1px solid;}    | "thin" collection
-.brd-b-thin   {border-bottom: 1px solid;} v
+.brd-b-thin   {border-bottom: 1px solid;} |
+...                                       v
 /* thick */
 .brd-thick    {border: 3px solid;}        ^
 .brd-t-thick  {border-top: 3px solid;}    | "thick" collection
-.brd-b-thick  {border-bottom: 3px solid;} v
+.brd-b-thick  {border-bottom: 3px solid;} |
+...                                       v
 
 /*
  * Border-color set
@@ -211,9 +211,11 @@ In this way, I want to emphasize that creating elements isn't *chaotic and messy
 .brcl-green60  {border-color: #7CB342;}   v
 ```
 Optionally, **collections can be titled by one-line comment**.
-But for now I intentionally skip some details, because we need to go further.
 
-So, if you look more carefully at the classes we have created you may notice we can already "draw" some GUI-elements. For example: blockquote, 2 buttons (blue, green), successful/warning/error messages, input etc. Let's create some of them:
+In this way, I want to emphasize that creating elements isn't *chaotic and messy* process. In contrast, creating elements takes some patience, premeditate and conventions. But for now skip the details and move closer to the point.
+
+###Usage
+So, if you look more carefully at the classes we have created at the penultimate example you may notice we can already "draw" some GUI-elements. For example: blockquote,  buttons (blue, green), successful/warning/error messages, input etc. Let's create some of them:
 ```HTML
 ...
 <body class="c-black">
@@ -243,6 +245,7 @@ So, if you look more carefully at the classes we have created you may notice we 
 - The more elements we create, the less elements we will need in the future;
 - The more elements we have, the more unique GUI-elements we can "draw" without creating new classes;
 - The more strictly we organize sets of elements, the more opportunities we have to reuse our code or read others.
+
 
 As you can see, ....
 
