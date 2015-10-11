@@ -116,11 +116,6 @@ Let's take a look at more "real-life" (but still very minimalistic) example:
 .pdd-r-sm     {padding-right: 5px;}
 .pdd-b-sm     {padding-bottom: 5px;}
 .pdd-l-sm     {padding-left: 5px;}
-.pdd-md       {padding: 10px;}
-.pdd-t-md     {padding-top: 10px;}
-.pdd-r-md     {padding-right: 10px;}
-.pdd-b-md     {padding-bottom: 10px;}
-.pdd-l-md     {padding-left: 10px;}
 
 /*
  * Margin set
@@ -170,10 +165,10 @@ It may looks scary, but don't hurry with the conclusions. You may notice element
 
 >
 - at the beginning sets with box-model properties, then visual related ones;
-- margin & padding sets are strict _*collections*_ of graduated values (small, medium etc);
+- margin & padding sets are strict *collections* of graduated values (small, medium etc);
 - background set has pseudo-class elements with an appropriate names goes after double dash `*--hover`;
 
-Let's take a look at one more point about elements. It is subsequent concept of set - **collection**. Collection is a **group of elements united by related values under one set**. For example:
+So here is another important thing about elements - **collection**. Collection is a subsequent concept of set. It means a **group of elements united by related values under a set**. For example:
 ```CSS
 /*
  * Padding set
@@ -215,7 +210,7 @@ Optionally, **collections can be titled by one-line comment**.
 In this way, I want to emphasize that creating elements isn't *chaotic and messy* process. In contrast, creating elements takes some patience, premeditate and conventions. But for now skip the details and move closer to the point.
 
 ###Usage
-So, if you look more carefully at the classes we have created at the penultimate example you may notice we can already "draw" some GUI-elements. For example: blockquote,  buttons (blue, green), successful/warning/error messages, input etc. Let's create some of them:
+So, if you look more carefully at the classes we have created at the "real-life" example you may notice we can already "draw" some GUI-elements. For example: blockquote,  buttons (blue, green), successful/warning/error messages, inputs etc. Let's create some of them:
 ```HTML
 ...
 <body class="c-black">
@@ -237,6 +232,7 @@ So, if you look more carefully at the classes we have created at the penultimate
   <div class="dsp-inbl pdd-sm c-white brd-thin brcl-blue60 bg-blue50 bg-blue40--hover">button</div>
   <div class="dsp-inbl pdd-sm c-white brd-thin brcl-green60 bg-green50 bg-green40--hover">button</div>
 </body>
+...
 ```
 ![screenshot from 2015-10-06 19 47 14](https://cloud.githubusercontent.com/assets/6209197/10315575/c710f562-6c63-11e5-9a45-d59c4039dcd2.png)<br>
 [Demo](http://jsfiddle.net/snfvk69t/1/). Ok, looks pretty good :) This is how SEM *may* look like in real apps. It may seems the code are messy and verbose, but it are matter of habit and HTML organization (which we optimize using Web Components a bit later). From now on I want to note some interesting assumptions:
