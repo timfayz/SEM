@@ -7,8 +7,6 @@ This page is step-by-step guide to using SEM. It explains design consideration, 
 0. [Design consideration](#design-consideration)
 0. [Advanced workflow](#advanced-workflow)
 0. [Theming](#theming)
-0. [Implementation](#implementation)
-0. [Troubleshooting](#troubleshooting)
 
 The guide is written so that we go from simple to complex gradually where each section complements the previous one.
 
@@ -290,10 +288,6 @@ Let's talk about *indivisible styles*. [Example]
 ```
 If you subsequently discovered you have an elements you can replace mix on - do it and get rid of mix, if you don't leave it alone.
 
-
-## Design consideration
-[explain]
-
 ## Advanced workflow
 Before going further we need to introduce one of CSS preprocessors, because originally SEM is born using [LESS](lesscss.org) and then [Sass](sass-lang.com). Preprocessors provide some important features for SEM: `mixin`s, `@import`ing files and `extend`ing properties from one selector to another. If you have no installed preprocessor - play it online: [Sass](http://sassmeister.com/gist/fa30826e11bc858c9c93), [LESS](http://lesscss.org/less-preview/#%7B%22less%22%3A%22._mix%20%7B%5Cn%20%20%26%3Aextend(.element-1)%3B%5Cn%20%20%26%3Aextend(.element-2)%3B%5Cn%7D%5Cn%5Cn.element-1%20%7Bcolor%3A%20%23fff%3B%7D%5Cn.element-2%20%7Bbackground%3A%20blue%3B%7D%5Cn%5Cn%22%7D), [Stylus](https://learnboost.github.io/stylus/try.html). If you don't use preprocessors anyway go to [SEM and plain CSS](). No offense, but in the next examples we stick on [Sass](http://sass-lang.com/guide). You can do everything I'll show using LESS or Stylus as well. The one excerpt about Stylus - it can't `@extend` selectors prior to its declaration.
 
@@ -403,6 +397,8 @@ When you add new elements ask yourself:
 
 Ideally, we should use elements as much as possible. If we can't or need to shorter s long line of elements in HTML - use mixes.
 
+## Intentionally missed
+
 ### SEM and plain CSS
 Using SEM and plain CSS have several limitations. The general recommendations are:
 
@@ -411,42 +407,13 @@ Using SEM and plain CSS have several limitations. The general recommendations ar
 - organize HTML code into separate modules using Web Components (see Polymer project(link))
 - [more]
 
-### Intentionally missed
-In addition SEM has recommendations for reduction postfix names. See [Conventions]().
+### Theming
+[explain]
 
-## Theming
+### Design consideration
+[explain]
 
-## Troubleshooting
-The general misuse of SEM can cause the following problems:
-
->
-- add
-
-The general solution to the list is to learn SEM by practice.
-
-The following list is just a problems I faced with using SEM in practice. If you have different one just open an issue.
-
-0. **Problem**: class attributes `<div class="long-line..">` become too long and it becomes difficult to manage them. <br>
-**Solution**: [solution]. Let's examine root cases when it happens:
-
->
-0. If we write simple static pages. Roughly speaking we can't create reusable GUI-templates at the server-side:
-```html+php
-// bad code, don't try to repeat it! :)
-<?php
-$_blockqoute = '<div class="pdd-l-sm mrg-t-sm mrg-b-sm clr-gray50 brd-l-thin brcl-black">%s</div>'
-?>
-<body "clr-black">
-  <?php printf($_blockqoute, "hello"); ?>
-</body>
-...
-```
-
-
-
-
-
-
+### Shortening properties
 The test on shortening 220 properties showed only about 7 collisions. Now let's look at shortening syntax in details:
 
   - one word property = first letter and two subsequent consonants:
@@ -482,3 +449,5 @@ The test on shortening 220 properties showed only about 7 collisions. Now let's 
    overflow-x              = [o][v]e[r]flow(-x)                = ovr-x
 ```
 
+### Shortening postfixes
+In addition SEM has recommendations for reduction postfix names. See [Conventions]().
