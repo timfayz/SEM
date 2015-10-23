@@ -3,10 +3,14 @@ This page is step-by-step guide to using SEM. It explains design consideration, 
 
 ### Table of content
 0. [Key concepts](#key-concepts)
-0. [Basic workflow](#workflow)
+0. [Basic workflow](#basic-workflow)
 0. [Design consideration](#design-consideration)
+0. [Advanced workflow](#advanced-workflow)
+0. [Theming](#theming)
+0. [Implementation](#implementation)
+0. [Troubleshooting](#troubleshooting)
 
-The guide is written so that we go from simple to complex where each section complements the previous one.
+The guide is written so that we go from simple to complex gradually where each section complements the previous one.
 
 ## Key concepts
 ### Element
@@ -24,7 +28,7 @@ Get started with the core of SEM - **element**. Element is a **class of one prop
   background: #fff;
 }
 ```
-You can think of elements like an atomic modifiers of the whole page layout. It's worth noting that class names start with a *valid CSS property name*. The downside of the decision is class names too long! Nobody likes type too long names. And to solve this issue we introduce **3 simple rules for abbreviating all property names**. Let's skip the details and see the final result:
+You can think of elements like an atomic modifiers of the whole page layout. It's worth noting that class names start with a *valid CSS property name*. The downside of the decision is class names too long! Nobody likes type too long names. To solve this issue we introduce **3 simple rules for abbreviating all property names**. Let's skip the details and see the final result:
 ```CSS
 .pdd-sm {padding: 5px;}
 
@@ -32,7 +36,7 @@ You can think of elements like an atomic modifiers of the whole page layout. It'
 
 .bg-white {background: #fff;}
 ```
-Ok, looks better. Take into account two things: (a) despite of `pdd`, `clr`, and `bg` are *shortcuts* they're considered as a *valid* property names; (b) **each element should be written in one line** to take up less space. The shortening rule-set guarantees almost no collisions between shortcuts as well as provide good readability, brevity and intuitiveness. The test on shortening 220 properties showed only about 7 collisions. Looking ahead having short and standardized prefixes is important for the several reasons:
+Ok, looks better. Take into account two things: (a) despite of `pdd`, `clr`, and `bg` are *shortcuts* they're considered as a *valid* property names; (b) **each element should be written in one line** to take up less space. The shortening rule-set guarantees almost no collisions between shortcuts providing good readability, brevity and intuitiveness. We will consider it later, but looking ahead having short and standardized prefixes is important for the several reasons:
 
 >
 - we can see what element does by its class name;
@@ -55,7 +59,7 @@ Someone can ask: what if we have class with more than one property? Yes, in real
  padding: 5px;
 }
 ```
-For now you can think of mixes like a regular classes as we usually do (`.header`, `.footer` etc). Underscore is used to visually separate one property classes and the combination of several ones. The decision was made because `_abstract-name` isn't really self-descriptive and can imply anything like a "black-box" when reading other people's HTML code or even your own after quite more time. Other important details around mix we discuss later. Move on.
+While you can think of mixes like a regular classes as we usually do (`.header`, `.nav` etc). Underscore is used to visually separate one property classes and the combination of several ones. The decision was made because unlike `clr-black` the `_abstract-name` isn't really *self-descriptive*; it can imply anything like a "black-box" when we read other people's HTML code or even our own after quite more time. Other important details around mix we discuss later. Move on.
 
 ### Set
 Here is the last main concept - **set**. Set is a **group of elements or mixes**. Add the previous mixes, some more elements and see the result:
@@ -96,7 +100,7 @@ In total we have *4 sets*, *2 mixes* and *6 elements*. Nothing special here, exc
 
 >
  - the former is useful to visually separate a flow of a large number of different sets
- - the latter makes it possible to *rewrite styles* of any mix by element
+ - the latter makes it possible to *rewrite styles* of any mix by element (like an global modifier)
 
 *It's a good practice to add spaces between curly brackets `{ property: value; }` for one-line declarations, but in SEM there is no strict rules for it. However I prefer not to do so, because manage them takes time and give no significant advantages.*
 
@@ -115,7 +119,7 @@ Now you have an idea how SEM looks like. At this step you can ask: and so what? 
 Let's take a look at more "real-life" (but still very minimalistic) example:
 ```CSS
 /* 40, 50, 60 - it's shortened numbers of 400, 500, 600 etc (tones of color).
- * https://www.google.ru/design/spec/style/color.html#color-color-palette */
+ * Eg: https://www.google.com/design/spec/style/color.html#color-color-palette */
 
 /*
  * Display set
@@ -169,20 +173,20 @@ Let's take a look at more "real-life" (but still very minimalistic) example:
 /*
  * Background set
  */
-.bg-blue50                {background: #03A9F4;}
-.bg-blue40--hover:hover   {background: #29B6F6;}
-.bg-green50               {background: #4CAF50;}
-.bg-green40--hover:hover  {background: #66BB6A;}
-.bg-white                 {background: #fff;}
+.bg-blue50              {background: #03A9F4;}
+.bg-blue40--hvr:hover   {background: #29B6F6;}
+.bg-green50             {background: #4CAF50;}
+.bg-green40--hvr:hover  {background: #66BB6A;}
+.bg-white               {background: #fff;}
 ```
 It may looks scary, but don't hurry with the conclusions. You may notice elements aren't followed randomly, but organized:
 
 >
 - at the beginning sets with box-model properties, then visual related ones;
 - margin & padding sets are strict *subsets* of graduated values (small, medium etc);
-- background set has pseudo-class elements whose names follow after double dash `*--hover`;
+- background set has pseudo-class elements whose names follow after double dash `*--hvr`;
 
-So here is another important thing about SEM - **subset**. It means a **group of related elements united by some basis value under a set**. For example:
+So here is another important thing about SEM - **subset**. It means a **group of related elements or mixes under a set** united by some basis value. For example:
 ```CSS
 /*
  * Padding set
@@ -215,12 +219,12 @@ So here is another important thing about SEM - **subset**. It means a **group of
 .brcl-blue60   {border-color: #039BE5;}   | set is a subset itself
 .brcl-green60  {border-color: #7CB342;}   v
 ```
-Optionally, **subsets can be titled by one-line comment** to visually separate related groups. Importantly, subsets should *always* arise when we talk about *well-organized sets* and we want to design truly reusable and intuitive code in SEM-way.
+Optionally, **subsets can be titled by one-line comment** to visually separate related groups. Importantly, subsets should *always* arise when we talk about well-designed sets or want to design truly reusable and intuitive code in SEM-way.
 
-In this way, I want to emphasize that creating elements isn't *chaotic and messy* process. In contrast, it takes some patience, premeditate and convention. As we learn later SEM is about *building well-designed sets* of elements or mixes. In this process we will be helped by conventions we learn later. But for now skip the details and move closer to the point.
+In this way, I want to emphasize that creating elements isn't *chaotic and messy* process. In contrast, it takes some patience and premeditate. As we learn later SEM is about *building well-designed sets*. In this process we will be helped by conventions we learn later. But for now skip the details and move closer to the point.
 
 ### "Hello world" example
-So, take a look more carefully at the classes we have created in the previous "real-life" example. You may notice we can already "draw" some GUI-elements. For example: blockquote, buttons (blue, green), successful/warning/error messages, inputs etc. Let's create some of them:
+So, take a look more carefully at the classes we have created in the previous "real-life" example. You may notice we can already "draw" some GUI-elements. For example: blockquote, buttons (blue, green), successful/warning/error messages, inputs etc. Let's create some of them and see how SEM *may* look like in action:
 ```HTML
 ...
 <body class="clr-black">
@@ -239,30 +243,62 @@ So, take a look more carefully at the classes we have created in the previous "r
  <div class="pdd-t-sm mrg-b-sm brd-b-thin brcl-black"></div>
 
  <!-- blue (primary) and green buttons -->
- <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-blue60 bg-blue50 bg-blue40--hover">button</div>
- <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-green60 bg-green50 bg-green40--hover">button</div>
+ <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-blue60 bg-blue50 bg-blue40--hvr">button</div>
+ <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-green60 bg-green50 bg-green40--hvr">button</div>
 </body>
 ...
 ```
 ![screenshot from 2015-10-06 19 47 14](https://cloud.githubusercontent.com/assets/6209197/10315575/c710f562-6c63-11e5-9a45-d59c4039dcd2.png)<br>
-[Demo](http://jsfiddle.net/snfvk69t/3/). Ok, looks pretty good :) This is how SEM *may* look like in real apps. It may seems the code are messy and verbose, but it are matter of your habit and HTML organization in general (which we optimize using Web Components a bit later). From now on I want to note some interesting assumptions:
+[Demo](http://jsfiddle.net/snfvk69t/3/). Ok, looks pretty good :) The example demonstrates how we can *divide* our design into small logical pieces. Putting them together we can create not only what we've designed, but also *unlimited variations* of your future ideas in a *similar form*.  It may seems the code are messy and verbose, but it are matter of your habit and HTML organization in general (which we optimize using Web Components a bit later). From now on I want to note some interesting assumptions:
 
 >
 - The more elements we create, the less elements we will need in the future;
 - The more elements we have, the more unique GUI-elements we can "draw" without creating new classes;
 - The more strictly we organize elements, the more opportunities we have to reuse our or read the others code.
 
-At this point we've learned how to create simple GUI using SEM without creating mixes. As I mentioned earlier, SEM is about *building well-organized sets*. So ideally we can avoid the use of mixes if we design good HTML structure and sets of elements. But in practice sometimes it seems impossible to do so.
+At this point we've learned how to create simple GUI using SEM without creating mixes. As it mentioned earlier, SEM is about *building well-designed sets*. So ideally, we can avoid the use of mixes if we design good HTML structure and sets of elements. But it seems impossible to do so in practice and mixes was introduced.
 
 ### Organizing mixes
-Before going deeper go back to mixes and wonder again: why we need them at all? Or conversely, why we just can't use *only* mixes and create classes like `.header`, `.footer`, `.button` etc in familiar way? TThe answer is because the basic purpose of mixes is create when we can do the same with elements.
+Before going deeper let's wonder again: why we need mixes at all? Or conversely, why we just can't use *only* mixes and create classes like `._nav`, `._footer` and `._button` in familiar way? The answer is in purposes of mixes. It was discovered we need them when:
+
+ 0. we create a specific styles that appears in the design only a once.
+ 0. it more rationally to create an *indivisible styles*.
+ 0. we create a *shortcut* of several elements to type less. See [Advanced workflow]().
+
+Let's talk about *indivisible styles*. [Example]
+```CSS
+._icon, _icon::before {
+  display: inline-block;
+  font-family: font-icon;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-size: inherit;
+  line-height: inherit;
+  text-rendering: auto;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+}
+.cnt-home--before::before {
+  content: "home";
+}
+```
+If you subsequently discovered you have an elements you can replace mix on - do it and get rid of mix, if you don't leave it alone.
 
 
-## Advanced Workflow
-Before going further we need to introduce one of CSS preprocessors, because originally SEM is born using LESS and then Sass. Preprocessors provide some important features for SEM: `mixin`s, `@import`ing files and `extend`ing properties from one selector to another. If you don't use preprocessors anyway go to [SEM and plain CSS]()
+## Design consideration
+[explain]
+
+## Advanced workflow
+Before going further we need to introduce one of CSS preprocessors, because originally SEM is born using [LESS](lesscss.org) and then [Sass](sass-lang.com). Preprocessors provide some important features for SEM: `mixin`s, `@import`ing files and `extend`ing properties from one selector to another. If you have no installed preprocessor - play it online: [Sass](http://sassmeister.com/gist/fa30826e11bc858c9c93), [LESS](http://lesscss.org/less-preview/#%7B%22less%22%3A%22._mix%20%7B%5Cn%20%20%26%3Aextend(.element-1)%3B%5Cn%20%20%26%3Aextend(.element-2)%3B%5Cn%7D%5Cn%5Cn.element-1%20%7Bcolor%3A%20%23fff%3B%7D%5Cn.element-2%20%7Bbackground%3A%20blue%3B%7D%5Cn%5Cn%22%7D), [Stylus](https://learnboost.github.io/stylus/try.html). If you don't use preprocessors anyway go to [SEM and plain CSS](). No offense, but in the next examples we stick on [Sass](http://sass-lang.com/guide). You can do everything I'll show using LESS or Stylus as well. The one excerpt about Stylus - it can't `@extend` selectors prior to its declaration.
 
 ### Organizing mixes using Preprocessor
-No offense, but in the following examples we stick on [Sass](http://sass-lang.com/guide). As you remember we can `extend` selectors as follows:
+ As you remember we can `extend` selectors as follows:
 ```SCSS
 /* [main.scss] */
 ._mix {
@@ -273,13 +309,12 @@ No offense, but in the following examples we stick on [Sass](http://sass-lang.co
 .element-1 {color: #fff;}
 .element-2 {background: blue;}
 
-/* compiles into */
+/* >> compiles into >> */
 
 /* [main.css] */
 .element-1, ._mix {color: #fff;}
 .element-2, ._mix {background: blue;}
 ```
-
 Now we need to introduce one of the key principle about mixes - **mix should be made of elements** or in other words consists of them. SHOULD means *as much as possible*. Let's apply the rule on our previous "real-life" example:
 ```SCSS
 /*
@@ -303,13 +338,13 @@ Now we need to introduce one of the key principle about mixes - **mix should be 
 ._button-green {
   @extend .brcl-green60;
   @extend .bg-green50;
-  @extend .bg-green40--hover;
+  @extend .bg-green40--hvr;
 }
 
 ._button-blue {
   @extend .brcl-blue60;
   @extend .bg-blue50;
-  @extend .bg-blue40--hover;
+  @extend .bg-blue40--hvr;
 }
 
 /*
@@ -317,18 +352,29 @@ Now we need to introduce one of the key principle about mixes - **mix should be 
  */
 ...
 ```
-Now `._blockquote` is like shortcut for these five classes or in other words - *mix of 5 elements*. Let's apply it:
+Now if we apply `._blockquote` on a tag it will do the same as if we apply the classes it contains directly. So in other words `._blockquote` is a *mix of 5 elements*:
 ```HTML
+before
+<body class="clr-black">
+ <!-- blockquote -->
+ <div class="pdd-l-sm mrg-t-sm mrg-b-sm clr-gray50 brd-l-thin brcl-black">blockquote</div>
+ ...
+ <!-- blue and green buttons -->
+ <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-blue60 bg-blue50 bg-blue40--hvr">button</div>
+ <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-green60 bg-green50 bg-green40--hvr">button</div>
+</body>
+
+after
 <body class="clr-black">
  <!-- blockquote -->
  <div class="_blockquote">blockquote</div>
-
+ ...
  <!-- blue and green buttons -->
- <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-blue60 bg-blue50 bg-blue40--hover">button</div>
- <div class="dsp-inbl pdd-sm clr-white brd-thin brcl-green60 bg-green50 bg-green40--hover">button</div>
+ <div class="_button _button-green">button</div>
+ <div class="_button _button-blue">button</div>
 </body>
 ```
-You can ask why mixes should? Because if mixes will mainly composed of elements changing the original elements will affect the whole document style. So this is a solution to create one-level hierarchy - mixes as objects on top of/inheriting from elements. Let's make a little tree visualization:
+It may seems like we design layout using regular and *fat* classes (like BEM, OOCSS etc), but actually they are just *shortcuts* and can be removed if necessary. You can ask why mixes should consist of elements? Because if mixes will mainly composed of elements changing the original will affect the whole layout. It gives flexibility or "mobility" to your code. And now we can say the general idea behind of SEM - *make less abstraction to get less overhead in the future*. We can simply visualize it as follows:
 ```
   x     x                   - - - mixes on top of mixes isn't good idea
  /       \
@@ -338,30 +384,53 @@ You can ask why mixes should? Because if mixes will mainly composed of elements 
 /       \/     \ \
 .bg-blue .pdd-sm .brd-thin  - - - elements
 ```
+So mixes can be used as a solution to create one-level hierarchy (**if necessary**) or for *indivisible objects*. There is no concept of *subset* for mixes. Because separating logic it's up to you how to do it better.
+[...]
 
 ### Recomendations on using elements and mixes
-Looks good, but this follows several problems. Sometimes we need to use
-
-let's list when we shouldn't use elements
-Now we need to state that ideally we should use elements as much as possible. If we can't or need to shorter long line of elements in HTML - use mixes.
-
-
-### SEM and plain CSS
-What if I don't use any preprocessors? If so use mixes as less as possible. Organize HTML code into separate modules using Web Components (see Polymer project(link))
-
-### Benefits of using SEM
-If you grasp the idea from previous examples you may guess SEM
-
-### Intentionally missed
-In addition SEM has recommendations for reduction postfix names. Add one more class and shorten the names according to recommendations:
-
-### SEM and elementcss
-
-### Troubleshooting
-You may notice that class attributes `<div class="long-line..">` become much longer. And sometimes it becomes difficult to manage them. Let's examine root cases when it happens:
+Let's consider when we shouldn't create elements:
 
 >
-0. If we write static pages. Roughly speaking we can't create reusable GUI-templates at the server-side:
+- add
+
+When you add new elements ask yourself:
+
+>
+- Is it worth to add new element?
+- Can I add it to the existing subset?
+- Can I create a new subset with it and sometime randomly created elements?
+- Can I redesign existing subset so that the need of new one will be suppressed?
+
+Ideally, we should use elements as much as possible. If we can't or need to shorter s long line of elements in HTML - use mixes.
+
+### SEM and plain CSS
+Using SEM and plain CSS have several limitations. The general recommendations are:
+
+>
+- use mixes as less as possible;
+- organize HTML code into separate modules using Web Components (see Polymer project(link))
+- [more]
+
+### Intentionally missed
+In addition SEM has recommendations for reduction postfix names. See [Conventions]().
+
+## Theming
+
+## Troubleshooting
+The general misuse of SEM can cause the following problems:
+
+>
+- add
+
+The general solution to the list is to learn SEM by practice.
+
+The following list is just a problems I faced with using SEM in practice. If you have different one just open an issue.
+
+0. **Problem**: class attributes `<div class="long-line..">` become too long and it becomes difficult to manage them. <br>
+**Solution**: [solution]. Let's examine root cases when it happens:
+
+>
+0. If we write simple static pages. Roughly speaking we can't create reusable GUI-templates at the server-side:
 ```html+php
 // bad code, don't try to repeat it! :)
 <?php
@@ -372,6 +441,44 @@ $_blockqoute = '<div class="pdd-l-sm mrg-t-sm mrg-b-sm clr-gray50 brd-l-thin brc
 </body>
 ...
 ```
-0. If we write static pages. Roughly speaking we can't create reusable GUI-templates at the server-side:
 
-There is no concept of *subset* for mixes. Because separating logic it's up to you how to do it better.
+
+
+
+
+
+The test on shortening 220 properties showed only about 7 collisions. Now let's look at shortening syntax in details:
+
+  - one word property = first letter and two subsequent consonants:
+```
+   [p]o[s]i[t]ion  = pst
+   [o][v]e[r]flow  = ovr
+```
+  - two word property = first letter, one subsequent consonant and the same for second word:
+```
+   [b]o[x]-[s][h]adow  = bxsh
+   [f]o[n]t-[s]i[z]e   = fnsz
+```
+
+  - three word = first letter, one subsequent consonant and two first letters of subsequent words:
+```
+   [a][n]imation-[t]iming-[f]unction = antf
+   [b]o[r]der-[i]mage-[s]ource       = bris
+```
+
+  Property direction abbreviated as follows:
+```
+   -top      = -t
+   -top-left = -tl
+   -bottom   = -b
+   -x/-y     = -x/-y
+```
+
+  Property direction is considered not as a word and always written separately at the end of shorthand using "-" hyphen:
+```
+   border-top-color        = [b]o[r]der(-top-)[c]o[l]or        = brcl-t
+   border-top-left-radius  = [b]o[r]der(-top-left-)[r]a[d]ius  = brrd-tl
+   margin-bottom           = [m]a[r][g]in(-bottom)             = mrg-b
+   overflow-x              = [o][v]e[r]flow(-x)                = ovr-x
+```
+
