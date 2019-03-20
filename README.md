@@ -14,5 +14,13 @@ SEM is born as a consequence of the development of [elementcss](https://github.c
 - [Conventions](docs/conventions.md). SEM conventions for naming and organizing CSS code 
 - [SEM + Sass = ❤](docs/sem_and_sass.md). How to get most of using SEM and [Sass](https://sass-lang.com/)
 
+## Examples
+To see right way how it looks like in *production*, go to one of the examples:
+
+- [index-basic.html](examples/index-basic.html) ([preview](http://htmlpreview.github.com/?https://github.com/timfayz/SEM/blob/master/examples/index-advanced.html))
+- [index-advanced.html](examples/index-advanced.html) ([preview](http://htmlpreview.github.com/?https://github.com/timfayz/SEM/blob/master/examples/index-advanced.html))
+
+You can grasp the idea right from the code itself and the [Guide](docs/guide.md) will just complement your assumptions!
+
 ## Contributing?
 If you have time and find SEM useful, feel free to open an issue for whatever reason you have: typos, contradictions, better ways to explain, organize, etc. Thank you!
