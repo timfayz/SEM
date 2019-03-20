@@ -378,14 +378,16 @@ It may seems like we design layout using regular and *fat* classes (like BEM, OO
 /       \/     \ \
 .bg-blue .pdd-sm .brd-thin  - - - elements
 ```
-So mixes can be used as a solution to create one-level hierarchy (**if necessary**) or for *indivisible objects*. There is no concept of *subset* for mixes. Because separating logic it's up to you how to do it better.
+So mixes can be used as a solution to create one-level hierarchy (if necessary) or for *indivisible objects*. There is no concept of *subset* for mixes. Because separating logic and how to do it better - it's up to you.
 [...]
+
+## Intentionally missed
 
 ### Recommendations on using elements and mixes
 Let's consider when we shouldn't create elements:
 
 >
-- add
+- WIP
 
 When you add new elements ask yourself:
 
@@ -397,15 +399,13 @@ When you add new elements ask yourself:
 
 Ideally, we should use elements as much as possible. If we can't or need to shorter s long line of elements in HTML - use mixes.
 
-## Intentionally missed
-
 ### SEM and plain CSS
 Using SEM and plain CSS have several limitations. The general recommendations are:
 
 >
 - use mixes as less as possible;
 - organize HTML code into separate modules using Web Components (see Polymer project(link))
-- [more]
+- [WIP]
 
 ### Theming
 [WIP]
