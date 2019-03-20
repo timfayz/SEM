@@ -1,11 +1,11 @@
-#SEM Conventions
+# SEM Conventions
 
 To create really convenient and reusable styles we should follow some rules. Since the main idea of ELEMENT is using a big amount of classes we take care about class naming and make it logical, intuitive and "ease of remembering" as much as possible. Thus far all classes that you will generate should obey to some rules. Most of all conventions came from best practice in creating styles.
 
 For simplification and standardization purposes CSS property prefixes conventions are already defined in the ELEMENT itself. **Full list of available properties' abbreviations** available in ``_naming.scss`` file. This file can be imported anywhere and used for standardized and concise class names.
 
-##CSS Naming Conventions
-###General Conventions
+## CSS Naming Conventions
+### General Conventions
 
 **All class names must be lowercase**
 
@@ -55,10 +55,10 @@ This set of names can be used in many cases:
   - border (line thickness)
   - amount of opacity
   - amount of alpha chanel in RGBA\HSLA colors <br>
-  etc
+  etc.
 
 
-###CSS Properties
+### CSS Properties
 
 **Words indicating directions of properties abbreviate as first letter of direction and must be always presented in class name:**
 
@@ -80,7 +80,7 @@ Examples:
   border-top-right-radius:  0;                .brr-tr-0
 ```
 
-**DO NOT READ BEYOND** - version 1.9 use different approach.
+### CSS Values
 
 **Properties abbreviate as one ... + full name of value:**
 [todo]
@@ -94,11 +94,7 @@ Examples:
   vertical-align:           center;           .vra-center
 ```
 
-###CSS Values
-[todo]
-
-
-###CSS Measurement Values
+### CSS Measurement Values
 
 **Measurement values abbreviate as sign(positive have no prefix and negative have "n" prefix) + digits + two letter from CSS unit's name:**
 
@@ -127,17 +123,17 @@ Absolute length units
 
 Examples:
 ```
-| property-name:          | value;          | class name
-  any-property:             0;                .classname-0
-  any-property:             10%;              .classname-10
-  any-property:             -10%;             .classname-n10
-  any-property:             10px;             .classname-10px
-  any-property:             -10px;            .classname-n10px
-  any-property:             10rem;            .classname-10re
-  any-property:             -10rem;           .classname-n10re
+| property-name:          | value;          | .class_name {}
+  property:                 0;                .cls-0
+  property:                 10%;              .cls-10
+  property:                 -10%;             .cls-n10
+  property:                 10px;             .cls-10px
+  property:                 -10px;            .cls-n10px
+  property:                 10rem;            .cls-10re
+  property:                 -10rem;           .cls-n10re
 ```
 
-###CSS Color Values
+### CSS Color Values
 
 **Basic color keywords values abbreviated as `k` letter + name of keyword (or shortened version):**
 
@@ -181,18 +177,16 @@ For alpha channel we use size names (see the beginning of the page). See example
 ```
 
 
-###CSS Complex Values
+### CSS Complex Values
 
-**For complex CSS values there is no strict rules**
-
-As a rule we abbreviate complex values as one general and demonstrative word. For example:
+*For complex CSS values there is no strict rules*. We just abbreviate complex values as one general and descriptive word. For example:
 ```
 | property-name:          | value;                              | class name
   box-shadow:               0 1px 4px rgba(0, 0, 0, 0.3),
                             0 0 40px rgba(0, 0, 0, 0.1) inset;    .bxsh-effectname
 ```
 
-##Variable Naming Conventions
+## Variable Naming Conventions
 
 **Variables should be namespaced**
 
@@ -209,15 +203,10 @@ Let's be less verbose and just see some examples:
 As you can every variable has it own namespace/prefix. Just make sure that every set of related variables have its own unified namespace/prefix. As a rule we set namespace according to filename of components. For example component `_grid.scss` contains variables all start with `$grid-*` etc.
 
 
-##Why we should follow naming rules and use standardized class prefixes?
+## Why we should follow naming rules and use standardized class prefixes?
 Standardized names and rules are very important for the several reasons:
 
-  1. We can reuse our own sets of classes in new projects with few changes.
-  2. We can share sets of classes to different people like snippets.
-  3. It is increase readability of our code for ourselves and other people.
-  4. Standardized names make it possible to create themes and share it.
-
----
-
-####Let's do something better together!
-Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.
+  1. We can reuse our own sets of classes in new projects with few changes
+  2. We can share sets of classes to different people like snippets
+  3. It is increase readability of our code for ourselves and other people
+  4. Standardized names make it possible to create themes and share it

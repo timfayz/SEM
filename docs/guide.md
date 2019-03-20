@@ -1,14 +1,14 @@
-# SEM Explanation
-This page is step-by-step guide to using SEM. It explains design consideration, key concepts, workflow, name conventions and file organization in depth. Please, read it carefully to the end before make any conclusions.
+# SEM Explained
+This page is step-by-step guide to SEM. It explains design consideration, key concepts, workflow, name conventions and file organization in depth. Please, read it carefully to the end before make any conclusions.
 
 ### Table of content
-0. [Key concepts](#key-concepts)
-0. [Basic workflow](#basic-workflow)
-0. [Design consideration](#design-consideration)
-0. [Advanced workflow](#advanced-workflow)
-0. [Theming](#theming)
+1. [Key concepts](#key-concepts)
+2. [Basic workflow](#basic-workflow)
+3. [Design consideration](#design-consideration)
+4. [Advanced workflow](#advanced-workflow)
+5. [Theming](#theming)
 
-The guide is written so that we go from simple to complex gradually where each section complements the previous one.
+The guide is written so that each section complements the previous one.
 
 ## Key concepts
 ### Element
@@ -259,9 +259,9 @@ At this point we've learned how to create simple GUI using SEM without creating 
 ### Organizing mixes
 Before going deeper let's wonder again: why we need mixes at all? Or conversely, why we just can't use *only* mixes and create classes like `._nav`, `._footer` and `._button` in familiar way? The answer is in purposes of mixes. It was discovered we need them when:
 
- 0. we create a specific styles that appears in the design only a once.
- 0. it more rationally to create an *indivisible styles*.
- 0. we create a *shortcut* of several elements to type less. See [Advanced workflow]().
+ 1. we create a specific styles that appears in the design only a once.
+ 2. it more rationally to create an *indivisible styles*.
+ 3. we create a *shortcut* of several elements to type less. See [Advanced workflow]().
 
 Let's talk about *indivisible styles*. [Example]
 ```CSS
@@ -289,7 +289,7 @@ Let's talk about *indivisible styles*. [Example]
 If you subsequently discovered you have an elements you can replace mix on - do it and get rid of mix, if you don't leave it alone.
 
 ## Advanced workflow
-Before going further we need to introduce one of CSS preprocessors, because originally SEM is born using [LESS](lesscss.org) and then [Sass](sass-lang.com). Preprocessors provide some important features for SEM: `mixin`s, `@import`ing files and `extend`ing properties from one selector to another. If you have no installed preprocessor - play it online: [Sass](http://sassmeister.com/gist/fa30826e11bc858c9c93), [LESS](http://lesscss.org/less-preview/#%7B%22less%22%3A%22._mix%20%7B%5Cn%20%20%26%3Aextend(.element-1)%3B%5Cn%20%20%26%3Aextend(.element-2)%3B%5Cn%7D%5Cn%5Cn.element-1%20%7Bcolor%3A%20%23fff%3B%7D%5Cn.element-2%20%7Bbackground%3A%20blue%3B%7D%5Cn%5Cn%22%7D), [Stylus](https://learnboost.github.io/stylus/try.html). If you don't use preprocessors anyway go to [SEM and plain CSS](). No offense, but in the next examples we stick on [Sass](http://sass-lang.com/guide). You can do everything I'll show using LESS or Stylus as well. The one excerpt about Stylus - it can't `@extend` selectors prior to its declaration.
+Before going further, we need to introduce one of CSS preprocessors, because originally SEM is born using [LESS](lesscss.org) and then moved to [Sass](sass-lang.com). Preprocessors provide some important features for SEM: `mixin`s (kinda functions in programming languages), `@import`ing files and `extend`ing properties from one selector to another. If you have no pre-installed packages - play it online: [Sass](http://sassmeister.com/gist/fa30826e11bc858c9c93), [LESS](http://lesscss.org/less-preview/#%7B%22less%22%3A%22._mix%20%7B%5Cn%20%20%26%3Aextend(.element-1)%3B%5Cn%20%20%26%3Aextend(.element-2)%3B%5Cn%7D%5Cn%5Cn.element-1%20%7Bcolor%3A%20%23fff%3B%7D%5Cn.element-2%20%7Bbackground%3A%20blue%3B%7D%5Cn%5Cn%22%7D), [Stylus](https://learnboost.github.io/stylus/try.html). If you don't want to use preprocessors, go to [SEM and plain CSS](). In the next examples we stick with [Sass](http://sass-lang.com/guide). You can do totally the same using LESS or Stylus as well. The only exception about Stylus - it cannot `@extend` selectors prior to its declaration.
 
 ### Organizing mixes using Preprocessor
  As you remember we can `extend` selectors as follows:
@@ -381,7 +381,7 @@ It may seems like we design layout using regular and *fat* classes (like BEM, OO
 So mixes can be used as a solution to create one-level hierarchy (**if necessary**) or for *indivisible objects*. There is no concept of *subset* for mixes. Because separating logic it's up to you how to do it better.
 [...]
 
-### Recomendations on using elements and mixes
+### Recommendations on using elements and mixes
 Let's consider when we shouldn't create elements:
 
 >
@@ -408,10 +408,10 @@ Using SEM and plain CSS have several limitations. The general recommendations ar
 - [more]
 
 ### Theming
-[explain]
+[WIP]
 
 ### Design consideration
-[explain]
+[WIP]
 
 ### Shortening properties
 The test on shortening 220 properties showed only about 7 collisions. Now let's look at shortening syntax in details:
