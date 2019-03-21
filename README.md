@@ -17,7 +17,7 @@ SEM is born as a consequence of the development of [elementcss](https://github.c
 ## Examples
 The idea is better grasped when you simply look at the code. Then, the [Guide](docs/guide.md) might become just a complement to your intuitive feelings. So to see it the right way in a *"production"*, check one of the following pages:
 
-- [index-basic.html](examples/index-basic.html) [[preview]](http://htmlpreview.github.com/?https://github.com/timfayz/SEM/blob/master/examples/index-advanced.html) - "Hello world" example
+- [index-basic.html](examples/index-basic.html) [[preview]](http://htmlpreview.github.com/?https://github.com/timfayz/SEM/blob/master/examples/index-basic.html) - "Hello world" example
 - [timfayz.github.io/index.html](https://github.com/timfayz/timfayz.github.io/blob/master/index.html) [[preview]](https://timfayz.github.io) - Personal page
 
 
