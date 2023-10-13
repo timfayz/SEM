@@ -44,7 +44,7 @@ SEM is not a mere imitation of [BEM](https://tech.yandex.com/bem/) or other meth
 ## Examples
 Before delving into the details, I highly recommend taking a moment to explore the examples. These examples serve as a practical introduction, helping you get a feel for SEM in action:
 
-- [index.html](examples/index.html) - "Hello world" example ([preview](http://htmlpreview.github.com/?https://github.com/timfayz/SEM/blob/master/examples/index.html))
+- [index.html](examples/index.html) - "Hello world" example ([preview](http://htmlpreview.github.io/?https://github.com/timfayz/SEM/blob/master/examples/index.html))
 - [index.html](https://github.com/timfayz/timfayz.github.io/blob/master/index.html) + [main.css](https://github.com/timfayz/timfayz.github.io/blob/master/styles/main.css) - Personal webpage ([preview](https://timfayz.github.io))
 - [index.html](https://github.com/marynicole/marynicole.github.io/blob/master/index.html) + [main.css](https://github.com/marynicole/marynicole.github.io/blob/master/css/main.css) - Birthday gift card ([preview](https://marynicole.github.io))
 
