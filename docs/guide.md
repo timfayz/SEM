@@ -98,7 +98,7 @@ In total, we have *4 sets*, *2 mixes*, and *6 elements*. Nothing special here, e
 
 *It's good practice to add spaces between curly brackets `{ property: value; }` for one-line declarations, but in SEM there are no strict rules for this. However, I prefer not to do so because managing them takes time and gives no significant advantages.*
 
-### Summarize
+### Summary
 Before we go further, let's sum up:
 
 - An **element** is a one-property class whose name starts with its property name abbreviated by some rules.
