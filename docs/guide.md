@@ -1,18 +1,18 @@
 # SEM Explained
-This page is step-by-step guide to SEM. It explains design consideration, key concepts, workflow, name conventions and file organization in depth. Please, read it carefully to the end before make any conclusions.
+This page is a step-by-step guide to SEM. It explains design considerations, key concepts, workflow, naming conventions, and file organization in depth.
 
-### Table of content
-1. [Key concepts](#key-concepts)
-2. [Basic workflow](#basic-workflow)
-3. [Design consideration](#design-consideration)
-4. [Advanced workflow](#advanced-workflow)
+### Table of Contents
+1. [Key Concepts](#key-concepts)
+2. [Basic Workflow](#basic-workflow)
+3. [Design Considerations](#design-consideration)
+4. [Advanced Workflow](#advanced-workflow)
 5. [Theming](#theming)
 
 The guide is written so that each section complements the previous one.
 
-## Key concepts
+## Key Concepts
 ### Element
-Get started with the core of SEM - **element**. Element is a **class of one property whose name starts with its property name**:
+Get started with the core of SEM - the **element**. An element is a **class with one property whose name starts with its property name**:
 ```CSS
 .padding-sm {
   padding: 5px;
@@ -26,7 +26,7 @@ Get started with the core of SEM - **element**. Element is a **class of one prop
   background: #fff;
 }
 ```
-You can think of elements like an atomic modifiers of the whole page layout. It's worth noting that class names start with a *valid CSS property name*. The downside of the decision is class names too long! Nobody likes type too long names. To solve this issue we introduce **3 simple rules for abbreviating all property names**. Let's skip the details and see the final result:
+You can think of elements as atomic modifiers of the whole page layout. It's worth noting that class names start with a *valid CSS property name*. The downside of this decision is that class names are too long! Nobody likes typing long names. To solve this issue, we introduce **3 simple rules for abbreviating all property names**. Let's skip the details and see the final result:
 ```CSS
 .pdd-sm {padding: 5px;}
 
@@ -34,16 +34,15 @@ You can think of elements like an atomic modifiers of the whole page layout. It'
 
 .bg-white {background: #fff;}
 ```
-Ok, looks better. Take into account two things: (a) despite of `pdd`, `clr`, and `bg` are *shortcuts* they're considered as a *valid* property names; (b) **each element should be written in one line** to take up less space. The shortening rule-set guarantees almost no collisions between shortcuts providing good readability, brevity and intuitiveness. We will consider it later, but looking ahead having short and standardized prefixes is important for the several reasons:
+Looks better. Keep in mind two things: (a) despite `pdd`, `clr`, and `bg` being *shortcuts*, they are considered *valid* property names; (b) **each element should be written on one line** to take up less space. The shortening rule-set guarantees almost no collisions between shortcuts, providing good readability, brevity, and intuitiveness. We'll consider this later, but having short and standardized prefixes is important for several reasons:
 
->
-- we can see what element does by its class name;
-- we can read others HTML code and always grasp the idea how layout looks like;
-- we can use IDE's autocomplete function to list related elements;
-- using short names with a lot of elements make resulting HTML code less verbose;
+- We can see what an element does by its class name.
+- We can read others' HTML code and always grasp the layout's idea.
+- We can use an IDE's autocomplete function to list related elements.
+- Using short names with a lot of elements makes the resulting HTML code less verbose.
 
 ### Mix
-Someone can ask: what if we have class with more than one property? Yes, in real projects we will. So here is the second concept - **mix**. Mix is a **regular class with more than one property and whose name starts with _** (underscore):
+Someone might ask: what if we have a class with more than one property? Yes, in real projects, we will. So here is the second concept - **mix**. A mix is a **regular class with more than one property and whose name starts with _** (underscore):
 ```CSS
 ._button {
  color: #fff;
@@ -57,10 +56,10 @@ Someone can ask: what if we have class with more than one property? Yes, in real
  padding: 5px;
 }
 ```
-While you can think of mixes like a regular classes as we usually do (`.header`, `.nav` etc). Underscore is used to visually separate one property classes and the combination of several ones. The decision was made because unlike `clr-black` the `_abstract-name` isn't really *self-descriptive*; it can imply anything like a "black-box" when we read other people's HTML code or even our own after quite more time. Other important details around mix we discuss later. Move on.
+While you can think of mixes as regular classes (like `.header`, `.nav`, etc.), the underscore visually separates one-property classes from combinations of several properties. This decision was made because, unlike `clr-black`, the `_abstract-name` isn't really *self-descriptive*; it can imply anything like a "black box" when we read other people's HTML code or even our own after quite some time. We will discuss other important details around mixes later. 
 
 ### Set
-Here is the last main concept - **set**. Set is a **group of elements or mixes**. Add the previous mixes, some more elements and see the result:
+The last basic concept is **set**. A set is a **group of elements or mixes**. Let's add the previous mixes, some more elements, and see the result:
 ```CSS
 /*
  * Forms set
@@ -94,27 +93,26 @@ Here is the last main concept - **set**. Set is a **group of elements or mixes**
 .pdd-sm     {padding: 5px;}
 .pdd-md     {padding: 10px;}
 ```
-In total we have *4 sets*, *2 mixes* and *6 elements*. Nothing special here, except **each set is titled by comment header** and **elements come after mixes**. It's not strict rules, but:
+In total, we have *4 sets*, *2 mixes*, and *6 elements*. Nothing special here, except **each set is titled by a comment header**, and **elements come after mixes**. These aren't strict rules, but:
 
->
- - the former is useful to visually separate a flow of a large number of different sets
- - the latter makes it possible to *rewrite styles* of any mix by element (like an global modifier)
+- The former is useful to visually separate a large number of different sets.
+- The latter makes it possible to *rewrite styles* of any mix by an element (like a global modifier).
 
-*It's a good practice to add spaces between curly brackets `{ property: value; }` for one-line declarations, but in SEM there is no strict rules for it. However I prefer not to do so, because manage them takes time and give no significant advantages.*
+*It's good practice to add spaces between curly brackets `{ property: value; }` for one-line declarations, but in SEM there are no strict rules for this. However, I prefer not to do so because managing them takes time and gives no significant advantages.*
 
 ### Summarize
-Before we go further let's sum up:
+Before we go further, let's sum up:
 
-- **element** is a one property class whose name starts with its property name abbreviated by some rules;
-- **mix** is a class with more than one property and whose name starts with underscore;
-- **set** is a group of related elements or mixes under a header;
+- An **element** is a one-property class whose name starts with its property name abbreviated by some rules.
+- A **mix** is a class with more than one property and whose name starts with an underscore.
+- A **set** is a group of related elements or mixes under a header.
 
-Now you have an idea how SEM looks like. At this step you can ask: and so what? We need to create dozens of one property classes and miraculously create complex layout?! Looking ahead the answer is yes. Now you can add: if so what about mixes? What is special with them and how do I know when is better to create mix or element? But let's not get ahead of ourselves and focus on elements for a while. I will explain how to organize them and why it's worth coping with dozens of them.
+Now you have an idea of how SEM looks. At this step, you might ask: so what? Do we need to create dozens of one-property classes to create a complex layout? Looking ahead, the answer is yes. Now you might add: if so, what about mixes? What is special about them, and how do I know when it is better to create a mix or an element? But let's not get ahead of ourselves and focus on elements for a while. I will explain how to organize them and why it's worth dealing with dozens of them.
 
 ## Basic workflow
 
 ### Organizing elements
-Let's take a look at more "real-life" (but still very minimalistic) example:
+Let's take a look at a more real-life but still very minimalistic example:
 ```CSS
 /* 40, 50, 60 - it's shortened numbers of 400, 500, 600 etc (tones of color).
  * Eg: https://www.google.com/design/spec/style/color.html#color-color-palette */
@@ -177,7 +175,7 @@ Let's take a look at more "real-life" (but still very minimalistic) example:
 .bg-green40--hvr:hover  {background: #66BB6A;}
 .bg-white               {background: #fff;}
 ```
-It may looks scary, but don't hurry with the conclusions. You may notice elements aren't followed randomly, but organized:
+You may notice that the elements order is not random:
 
 >
 - at the beginning sets with box-model properties, then visual related ones;
