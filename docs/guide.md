@@ -8,8 +8,6 @@ This page is a step-by-step guide to SEM. It explains design considerations, key
 4. [Advanced Workflow](#advanced-workflow)
 5. [Theming](#theming)
 
-The guide is written so that each section complements the previous one.
-
 ## Key Concepts
 ### Element
 Get started with the core of SEM - the **element**. An element is a **class with one property whose name starts with its property name**:
